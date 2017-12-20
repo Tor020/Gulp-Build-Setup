@@ -117,7 +117,7 @@ gulp.task('default', ['sassStyles','sass']);
   gulp.task('test', ['checkCss']) //to test against bulma files in use
   gulp.task('minify', ['babel','minifyCss',])  //minfies everything
   gulp.task('babelify', ['babel']) //calls babel and then minifies the output 
-  gulp.task('bodyInjectCss', ['minifyCss', 'inlineCss']);
+  gulp.task('bodyInjectCss', ['inlineCss']);
 
   gulp.task('sass', () => {
     gulp.watch('Dev/sass/**/*.scss', ['sassStyles']); //path to the files to watch, pass in an array with the tasks that we want to run when the files are changed

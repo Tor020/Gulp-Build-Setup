@@ -24,6 +24,7 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
       .pipe(babel({
         presets: ['env']
       }))
+      .pipe(uglify())
       .pipe(gulp.dest('./Build/scripts'))
   );
 
@@ -47,7 +48,8 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
     ];
     return gulp.src('./Dev/css/*.css')
       .pipe(postcss(plugins))
-      .pipe(gulp.dest('./Dev/css/stylesInUse/'));
+      .pipe(rename('stylesInUse.css'))
+      .pipe(gulp.dest('./Dev/css/'));
   });
 
 // minifyCss Task
@@ -55,13 +57,13 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
     const processors = [
       cssnano
     ];
-    return gulp.src('./Dev/css/*.css')
+    return gulp.src('./Dev/css/style.css')
       .pipe(postcss(processors)) //all of the items in the processors array will be applied to the src css files
       .pipe(gulp.dest('./Build/css/'));
   });
 
 // inlineCSS task
-  gulp.task('inlineCSS', () => {
+  gulp.task('inlineCss', () => {
     return gulp.src('./Dev/*.html') //finds all of the styles in the associated .html files via their linkrel and injects them
       .pipe(inlineCss())
       .pipe(gulp.dest('build/'));
@@ -101,10 +103,26 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
   gulp.task('sassStyles', () => {
     gulp.src('Dev/sass/**/*.scss') //relative to Gulpfile.js 
       .pipe(sass().on('error', sass.logError)) //compiles the sass and if there is an error it explains where
-      .pipe(gulp.dest('./css/'));  //outputs compiled sass here 
+      .pipe(gulp.dest('./Dev/css/'));  //outputs compiled sass here 
   });
 
-// Default Watch task for sass
+
+
+gulp.task('default', ['sassStyles','sass']);
+
+
   gulp.task('default', () => {
     gulp.watch('Dev/sass/**/*.scss', ['sassStyles']); //path to the files to watch, pass in an array with the tasks that we want to run when the files are changed
   });
+  gulp.task('test', ['checkCss']) //to test against bulma files in use
+  gulp.task('minify', ['babel','minifyCss',])  //minfies everything
+  gulp.task('babelify', ['babel']) //calls babel and then minifies the output 
+  gulp.task('bodyInjectCss', ['minifyCss', 'inlineCss']);
+
+  gulp.task('sass', () => {
+    gulp.watch('Dev/sass/**/*.scss', ['sassStyles']); //path to the files to watch, pass in an array with the tasks that we want to run when the files are changed
+  });
+
+
+  
+  

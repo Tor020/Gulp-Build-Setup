@@ -25,5 +25,5 @@ minifies css and injects into body
 minifies images
 ```gulp imageMin```
 
-pipes html and minfies everything
+pipes html and minifies everything
 ```gulp plsgo```

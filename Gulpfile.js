@@ -39,7 +39,7 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
   });
 
 // checkCss to Task
-  gulp.task('checkCss', function () {
+  gulp.task('checkCss', () => {
     const plugins = [
       uncss({
         html: ['./Dev/*.html']
@@ -51,7 +51,7 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
   });
 
 // minifyCss Task
-  gulp.task('minifyCss', function () {
+  gulp.task('minifyCss', () => {
     const processors = [
       cssnano
     ];
@@ -61,14 +61,14 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
   });
 
 // inlineCSS task
-  gulp.task('inlineCSS', function () {
+  gulp.task('inlineCSS', () => {
     return gulp.src('./Dev/*.html') //finds all of the styles in the associated .html files via their linkrel and injects them
       .pipe(inlineCss())
       .pipe(gulp.dest('build/'));
   });
 
 // pipeAllFiles task
-  gulp.task('pipeAllFiles', function () {  // to ensure that all files have been transferred to Build Folder
+  gulp.task('pipeAllFiles', () => {  // to ensure that all files have been transferred to Build Folder
     const html = './Dev/*.html';
     const scripts = './Dev/scripts/*.js';
     const css = './Dev/css/*.css';
@@ -85,26 +85,26 @@ const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gul
 
 // concatcss Tasks
   // can be used for javascript
-  gulp.task('concatcss', function () {
+  gulp.task('concatcss', () => {
     return gulp.src('./Dev/sass/baseUtilities/*.scss') //returns all of the .scss files from currentDir/Dev/sass/baseUtilities/AnyFilesThatEndIn.scss
       .pipe(concat('all.scss')) //concats all of the found files into one file named here
       .pipe(gulp.dest('./Build/')); //spits it out in this directory  cwd/dist/
   });
 
-  gulp.task('concatMultiFolders', function () {
+  gulp.task('concatMultiFolders', () => {
       return gulp.src(['./Dev/sass/baseUtilities/*.scss', './Dev/sass/pages/*.scss', './Dev/sass/bulmaOverWrites/*.scss'])  //the files will be concatted in the order they are specified here
         .pipe(concat('all.scss'))
         .pipe(gulp.dest('./Build/')); //spits it out in this directory  cwd/dist/
     });
 
 // sassStyles task 
-  gulp.task('sassStyles', function () {
+  gulp.task('sassStyles', () => {
     gulp.src('Dev/sass/**/*.scss') //relative to Gulpfile.js 
       .pipe(sass().on('error', sass.logError)) //compiles the sass and if there is an error it explains where
       .pipe(gulp.dest('./css/'));  //outputs compiled sass here 
   });
 
 // Default Watch task for sass
-  gulp.task('default', function () {
+  gulp.task('default', () => {
     gulp.watch('Dev/sass/**/*.scss', ['sassStyles']); //path to the files to watch, pass in an array with the tasks that we want to run when the files are changed
   });

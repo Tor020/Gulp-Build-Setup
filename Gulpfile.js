@@ -12,7 +12,7 @@ const babel = require('gulp-babel');  //https://github.com/babel/gulp-babel  // 
 const imagemin = require('gulp-imagemin'); //https://github.com/sindresorhus/gulp-imagemin
 
 // imagemin Task
-  gulp.task('imagemin', () =>
+  gulp.task('imageMin', () =>
     gulp.src('./Dev/images/*')
       .pipe(imagemin())
       .pipe(gulp.dest('./Build/images'))
@@ -118,6 +118,8 @@ gulp.task('default', ['sassStyles','sass']);
   gulp.task('minify', ['babel','minifyCss',])  //minfies everything
   gulp.task('babelify', ['babel']) //calls babel and then minifies the output 
   gulp.task('bodyInjectCss', ['inlineCss']);
+  gulp.task('plsgo', ['pipeAllFiles', 'minify', 'imageMin']);
+
 
   gulp.task('sass', () => {
     gulp.watch('Dev/sass/**/*.scss', ['sassStyles']); //path to the files to watch, pass in an array with the tasks that we want to run when the files are changed

@@ -21,3 +21,9 @@ uglify + babel javascript
 
 minifies css and injects into body
 ```gulp bodyInjectCss```
+
+minifies images
+```gulp imageMin```
+
+pipes html and minfies everything
+```gulp plsgo```

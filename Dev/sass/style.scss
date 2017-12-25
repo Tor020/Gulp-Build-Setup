@@ -6,13 +6,13 @@
 @import './Dev/sass/baseUtilities/_variables.scss';
 
 /* Importing Bulma Overwrites FIles */ 
-@import './Dev/sass/bulmaOverwrites/_customBulma.scss'; 
+// @import './Dev/sass/bulmaOverwrites/_customBulma.scss'; 
 
 /* Importing All Base Utilities */
 @import './Dev/sass/baseUtilities/_mixins.scss';
 @import './Dev/sass/baseUtilities/_placeholders.scss';  
-
+ 
 /* Importing Layout FIles */
 @import './Dev/sass/pages/global.scss';
 @import './Dev/sass/pages/index.scss';
-       
+         

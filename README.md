@@ -22,6 +22,9 @@ uglify + babel javascript
 minifies css and injects into body
 ```gulp bodyInjectCss```
 
+check the CSS styles in use against the index.html page and create a document with only the styles that are currently in use on the page
+```gulp checkCss```
+
 minifies images
 ```gulp imageMin```
 
